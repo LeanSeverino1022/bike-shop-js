@@ -23,7 +23,7 @@ $j('#wc_bookings_field_resource').prop('selectedIndex', -1);
 /**
  *  *||Config
  */
-window.gMainUrl = 'https://mountainbikehurenschoorl.nl';
+window.gMainUrl = window.location.origin;
 
 var mySettings = {
     spinner: {
@@ -88,6 +88,11 @@ $j(document).ajaxSend(function (event, xhr, settings) {
         // Your logic here that needs to be executed when the request is made
         //ADDING loader icon to the calendar when loading the page (https://mountainbikehurenschoorl.nl/huur/mountainbikes)
         blocker.blockCalendar();
+    }
+
+    if (typeof settings.url === 'string' && settings.url.includes('ajax=checkout')) {
+        //show loader when user clicks place reservation
+        blocker.blockContentTemp();
     }
 });
 
